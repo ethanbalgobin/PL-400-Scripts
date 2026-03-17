@@ -12,5 +12,16 @@ this.formOnLoad = function (executionContext) {
    */
   if (formContext.getAttribute("fax").getValue() == null) {
     formContext.getAttribute("fax").setValue("123-4567");
+
+    /**
+     * An actions property can also be set, which will render a control for the user to use.
+     * If they select the control, the relevant action will be executed
+     * e.g actions: []
+     */
+    formContext.getControl("fax").addNotification({
+      messages: ["Fax number set to default."],
+      notificationLevel: "RECOMMENDATION", // type of message {recommendation, information, error}
+      uniqueID: "IDUnique220912-2",
+    });
   }
 };
