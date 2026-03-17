@@ -1,7 +1,7 @@
 this.formOnLoad = function (executionContext) {
   var formContext = executionContext.getFormContext();
   formContext.ui.setFormNotification(
-    "Hello world v6",
+    "Hello world v7",
     "INFO",
     "IDUnique220912",
   ); // message content, type of message, id of message
@@ -37,5 +37,26 @@ this.AddressStreet3Hide = function (executionContext) {
     formContext
       .getControl("address1_composite_compositionLinkControl_address1_line3")
       .setVisible(true);
+  }
+};
+
+this.HandleZipCodeLabel = function (executionContext) {
+  var formContext = executionContext.getFormContext();
+  var countryValue = formContext.getAttribute("address1_country").getValue();
+
+  var postalCodeControl = formContext.getControl(
+    "address1_composite_compositionLinkControl_address1_postalcode",
+  );
+
+  if (!postalCodeControl) return;
+
+  var ukRegex = /^(United Kingdom|UK|U\.K\.|Great Britain|GB|GBR)$/i;
+
+  if (countryValue && ukRegex.test(countryValue.trim())) {
+    postalCodeControl.setLabel("Postal code");
+  } else if (countryValue === null || countryValue === "") {
+    postalCodeControl.setLabel("ZIP/Postal code");
+  } else {
+    postalCodeControl.setLabel("Zip code");
   }
 };
