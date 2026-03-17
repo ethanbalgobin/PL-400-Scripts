@@ -1,7 +1,7 @@
 this.formOnLoad = function (executionContext) {
   var formContext = executionContext.getFormContext();
   formContext.ui.setFormNotification(
-    "Hello world v3",
+    "Hello world v6",
     "INFO",
     "IDUnique220912",
   ); // message content, type of message, id of message
@@ -23,5 +23,19 @@ this.formOnLoad = function (executionContext) {
       notificationLevel: "RECOMMENDATION", // type of message {recommendation, information, error}
       uniqueID: "IDUnique220912-2",
     });
+  }
+};
+
+this.AddressStreet3Hide = function (executionContext) {
+  var formContext = executionContext.getFormContext();
+
+  if (formContext.getAttribute("address1_line2").getValue() == null) {
+    formContext
+      .getControl("address1_composite_compositionLinkControl_address1_line3")
+      .setVisible(false); // when fields on a form are linked together, they are known as a composition link control
+  } else {
+    formContext
+      .getControl("address1_composite_compositionLinkControl_address1_line3")
+      .setVisible(true);
   }
 };
